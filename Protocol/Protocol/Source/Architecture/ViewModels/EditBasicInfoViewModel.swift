@@ -24,7 +24,7 @@ protocol EditBasicInfoViewModelProtocol: ObservableObject {
 
 class EditBasicInfoViewModel: EditBasicInfoViewModelProtocol {
 
-    private(set) var delegate: EditBasicInfoViewModelDelegate?
+    private(set) weak var delegate: EditBasicInfoViewModelDelegate?
 
     required init(delegate: EditBasicInfoViewModelDelegate) {
         self.delegate = delegate

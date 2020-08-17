@@ -5,61 +5,28 @@
 
 import SwiftUI
 
-struct CreatePasswordView: View {
-    @State var password = ""
-    @State var confirmPassword = ""
-    @State private var error = ""
-
-    @State private var navigatingNextView = false
+struct CreatePasswordView<ViewModel: CreatePasswordViewModelProtocol>: View {
+    @ObservedObject var model: ViewModel
 
     private let spacing: CGFloat = 16
-    private let symbolsCount = 6
 
     var body: some View {
         VStack(spacing: spacing) {
 
-            ErrorText(error: error)
+            ErrorText(error: model.error)
 
-            InputField(placeholder: "Password", text: $password, isSecureField: true)
-            InputField(placeholder: "Confirm Password", text: $confirmPassword, isSecureField: true)
-
-            NavigationLink(destination: ChooseTagsView(), isActive: $navigatingNextView) {
-                EmptyView()
-            }
+            InputField(placeholder: "Password", text: $model.password, isSecureField: true)
+            InputField(placeholder: "Confirm Password", text: $model.confirmPassword, isSecureField: true)
         }
             .navigationBarTitle("Password", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: nextClicked) {
+            .navigationBarItems(trailing: Button(action: model.nextClicked) {
                 Text("Next")
             })
-    }
-
-    private func nextClicked() {
-        error = validate()
-        if error.isEmpty {
-            navigatingNextView = true
-        }
-    }
-
-    private func validate() -> String {
-        if password.isEmpty {
-            return "Password is empty"
-        }
-        if confirmPassword.isEmpty {
-            return "Confirm Password is empty"
-        }
-        if password.count < symbolsCount {
-            return "Password is less than \(symbolsCount) symbols"
-        }
-        if confirmPassword != password {
-            return "Password and confirm password does no match"
-        }
-
-        return ""
     }
 }
 
 struct CreatePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePasswordView()
+        CreatePasswordView(model: CreatePasswordViewModelMock())
     }
 }

@@ -7,12 +7,24 @@ import SwiftUI
 
 class ApplicationFlowCoordinator: ObservableObject {
 
-    private lazy var loginViewModel: LoginViewModel = {
+    private lazy var loginViewModel = {
         LoginViewModel(delegate: self)
     }()
 
-    private lazy var editBasicInfoViewModel: EditBasicInfoViewModel = {
+    private lazy var editBasicInfoViewModel = {
         EditBasicInfoViewModel(delegate: self)
+    }()
+
+    private lazy var createPasswordViewModel = {
+        CreatePasswordViewModel(delegate: self)
+    }()
+
+    private lazy var chooseTagsViewModel = {
+        ChooseTagsViewModel(delegate: self)
+    }()
+
+    private lazy var postsViewModel = {
+        PostsViewModel(delegate: self)
     }()
 
     private lazy var editBasicInfoViewDirection: DirectionViewModel = {
@@ -27,13 +39,18 @@ class ApplicationFlowCoordinator: ObservableObject {
         DirectionViewModel(view: AnyView(chooseTagsView()), isActive: false)
     }()
 
-    private lazy var postsDirection: DirectionViewModel = {
+    // Duplicate routes to handle two route states
+    private lazy var loginPostsDirection: DirectionViewModel = {
+        DirectionViewModel(view: AnyView(postsView()), isActive: false)
+    }()
+
+    private lazy var chooseTagsPostsDirection: DirectionViewModel = {
         DirectionViewModel(view: AnyView(postsView()), isActive: false)
     }()
 
     func start() -> some View {
         let view = LoginView(model: loginViewModel)
-        return nodeView(view, directions: [postsDirection, editBasicInfoViewDirection], isRoot: true)
+        return nodeView(view, directions: [loginPostsDirection, editBasicInfoViewDirection], isRoot: true)
     }
 
     private func editBasicInfoView() -> some View {
@@ -42,17 +59,17 @@ class ApplicationFlowCoordinator: ObservableObject {
     }
 
     private func createPasswordView() -> some View {
-        let view = CreatePasswordView()
+        let view = CreatePasswordView(model: createPasswordViewModel)
         return nodeView(view, directions: [chooseTagsDirection])
     }
 
     private func chooseTagsView() -> some View {
-        let view = ChooseTagsView()
-        return nodeView(view, directions: [postsDirection])
+        let view = ChooseTagsView(model: chooseTagsViewModel)
+        return nodeView(view, directions: [chooseTagsPostsDirection])
     }
 
     private func postsView() -> some View {
-        let view = PostsView(tags: ["1"])
+        let view = PostsView(model: postsViewModel)
         return nodeView(view, directions: [])
     }
 
@@ -69,10 +86,40 @@ extension ApplicationFlowCoordinator: EditBasicInfoViewModelDelegate {
 
 extension ApplicationFlowCoordinator: LoginViewModelDelegate {
     func navigateHome() {
-        self.postsDirection.isActive = true
+        postsViewModel.tags = ["tags", "from", "login"]
+        loginPostsDirection.isActive = true
     }
 
     func navigateSignUp() {
-        self.editBasicInfoViewDirection.isActive = true
+        editBasicInfoViewDirection.isActive = true
+    }
+}
+
+extension ApplicationFlowCoordinator: CreatePasswordViewModelDelegate {
+    func navigateChooseTags() {
+        chooseTagsDirection.isActive = true
+    }
+}
+
+extension ApplicationFlowCoordinator: ChooseTagsViewModelDelegate {
+    func navigatePosts() {
+        postsViewModel.tags = chooseTagsViewModel.models.filter{ $0.isSelected }.map{ $0.tag.tag }
+        chooseTagsPostsDirection.isActive = true
+    }
+}
+
+extension ApplicationFlowCoordinator: PostsViewModelDelegate {
+    func navigateLogout() {
+        if loginPostsDirection.isActive {
+            loginPostsDirection.isActive = false
+            
+        } else {
+
+            // todo back to login from choose tags
+            editBasicInfoViewDirection.isActive = false
+            createPasswordDirection.isActive = false
+            chooseTagsDirection.isActive = false
+            chooseTagsPostsDirection.isActive = false
+        }
     }
 }

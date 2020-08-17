@@ -11,7 +11,3 @@ struct PostModel: Identifiable {
 
     var id: String = UUID().uuidString
 }
-
-extension PostModel {
-    static let sample = PostModel(content: "Lorem ipsum dolor sit amet", tags: ["Test", "Demo", "Post"])
-}

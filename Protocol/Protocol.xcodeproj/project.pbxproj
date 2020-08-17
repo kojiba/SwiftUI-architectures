@@ -9,11 +9,17 @@
 /* Begin PBXBuildFile section */
 		BCE48539D0582F76D2BAC2E3 /* ApplicationFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48AA4520761086951F885 /* ApplicationFlowCoordinator.swift */; };
 		BCE485F8B31F1E1E8CBE9C19 /* EditBasicInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48A2418D8E0BC9B22E545 /* EditBasicInfoViewModel.swift */; };
+		BCE486A0CAD7FB488AE31F1E /* ChooseTagsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4826B72D3726F3D7E118A /* ChooseTagsViewModelMock.swift */; };
 		BCE4873EC4BB11E6CF2BEC4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE484A20860DB8D50177CB5 /* LoginViewModel.swift */; };
 		BCE487881AAB58E90FC1DD99 /* LoginViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */; };
+		BCE4881A0673C838CAF682DC /* CreatePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE481779E821932672ED4D1 /* CreatePasswordViewModel.swift */; };
 		BCE488C278365A7716CB782E /* CoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE488BB1362591FAF83835C /* CoordinatorMock.swift */; };
+		BCE48B4C80C480C952BDE287 /* ChooseTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE489F88F31385B886E1204 /* ChooseTagsViewModel.swift */; };
 		BCE48DB4675E1C887D22978A /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4885732B61FC4E2B7608A /* NodeView.swift */; };
 		BCE48DECF55C1647E9E8A19F /* EditBasicInfoViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4817B0DCDC30FB45C5C5D /* EditBasicInfoViewModelMock.swift */; };
+		BCE48EB600E1284F3DC66592 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48A3F450F09098E3FC449 /* PostsViewModel.swift */; };
+		BCE48EF9B9CB5D070D1361F0 /* CreatePasswordViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE481F0FE9B9C05A89B54A6 /* CreatePasswordViewModelMock.swift */; };
+		BCE48F6FC281938EB33E3435 /* PostsViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE485AC4074BDFA5F7430DF /* PostsViewModelMock.swift */; };
 		BCE48FAE1AE47080E76EBABA /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48EE366738317274B649B /* NetworkMock.swift */; };
 		FBAB1AEC24E98A0F00BADF1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBAB1AD224E98A0F00BADF1C /* LaunchScreen.storyboard */; };
 		FBAB1AED24E98A0F00BADF1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBAB1AD324E98A0F00BADF1C /* Assets.xcassets */; };
@@ -49,12 +55,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BCE481779E821932672ED4D1 /* CreatePasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewModel.swift; sourceTree = "<group>"; };
 		BCE4817B0DCDC30FB45C5C5D /* EditBasicInfoViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewModelMock.swift; sourceTree = "<group>"; };
+		BCE481F0FE9B9C05A89B54A6 /* CreatePasswordViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewModelMock.swift; sourceTree = "<group>"; };
+		BCE4826B72D3726F3D7E118A /* ChooseTagsViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsViewModelMock.swift; sourceTree = "<group>"; };
 		BCE484A20860DB8D50177CB5 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelMock.swift; sourceTree = "<group>"; };
+		BCE485AC4074BDFA5F7430DF /* PostsViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModelMock.swift; sourceTree = "<group>"; };
 		BCE4885732B61FC4E2B7608A /* NodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
 		BCE488BB1362591FAF83835C /* CoordinatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorMock.swift; sourceTree = "<group>"; };
+		BCE489F88F31385B886E1204 /* ChooseTagsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsViewModel.swift; sourceTree = "<group>"; };
 		BCE48A2418D8E0BC9B22E545 /* EditBasicInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewModel.swift; sourceTree = "<group>"; };
+		BCE48A3F450F09098E3FC449 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		BCE48AA4520761086951F885 /* ApplicationFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationFlowCoordinator.swift; sourceTree = "<group>"; };
 		BCE48EE366738317274B649B /* NetworkMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMock.swift; sourceTree = "<group>"; };
 		FBAB1AAB24E989D400BADF1C /* Protocol.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Protocol.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +121,9 @@
 				BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */,
 				BCE48EE366738317274B649B /* NetworkMock.swift */,
 				BCE4817B0DCDC30FB45C5C5D /* EditBasicInfoViewModelMock.swift */,
+				BCE481F0FE9B9C05A89B54A6 /* CreatePasswordViewModelMock.swift */,
+				BCE4826B72D3726F3D7E118A /* ChooseTagsViewModelMock.swift */,
+				BCE485AC4074BDFA5F7430DF /* PostsViewModelMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -118,6 +133,9 @@
 			children = (
 				BCE484A20860DB8D50177CB5 /* LoginViewModel.swift */,
 				BCE48A2418D8E0BC9B22E545 /* EditBasicInfoViewModel.swift */,
+				BCE481779E821932672ED4D1 /* CreatePasswordViewModel.swift */,
+				BCE489F88F31385B886E1204 /* ChooseTagsViewModel.swift */,
+				BCE48A3F450F09098E3FC449 /* PostsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -355,6 +373,12 @@
 				BCE485F8B31F1E1E8CBE9C19 /* EditBasicInfoViewModel.swift in Sources */,
 				BCE48DECF55C1647E9E8A19F /* EditBasicInfoViewModelMock.swift in Sources */,
 				BCE48DB4675E1C887D22978A /* NodeView.swift in Sources */,
+				BCE4881A0673C838CAF682DC /* CreatePasswordViewModel.swift in Sources */,
+				BCE48EF9B9CB5D070D1361F0 /* CreatePasswordViewModelMock.swift in Sources */,
+				BCE48B4C80C480C952BDE287 /* ChooseTagsViewModel.swift in Sources */,
+				BCE486A0CAD7FB488AE31F1E /* ChooseTagsViewModelMock.swift in Sources */,
+				BCE48EB600E1284F3DC66592 /* PostsViewModel.swift in Sources */,
+				BCE48F6FC281938EB33E3435 /* PostsViewModelMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
