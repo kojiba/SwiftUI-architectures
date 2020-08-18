@@ -13,7 +13,6 @@
 		BCE4873EC4BB11E6CF2BEC4F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE484A20860DB8D50177CB5 /* LoginViewModel.swift */; };
 		BCE487881AAB58E90FC1DD99 /* LoginViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */; };
 		BCE4881A0673C838CAF682DC /* CreatePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE481779E821932672ED4D1 /* CreatePasswordViewModel.swift */; };
-		BCE488C278365A7716CB782E /* CoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE488BB1362591FAF83835C /* CoordinatorMock.swift */; };
 		BCE48B4C80C480C952BDE287 /* ChooseTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE489F88F31385B886E1204 /* ChooseTagsViewModel.swift */; };
 		BCE48DB4675E1C887D22978A /* NodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4885732B61FC4E2B7608A /* NodeView.swift */; };
 		BCE48DECF55C1647E9E8A19F /* EditBasicInfoViewModelMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE4817B0DCDC30FB45C5C5D /* EditBasicInfoViewModelMock.swift */; };
@@ -23,7 +22,6 @@
 		BCE48FAE1AE47080E76EBABA /* NetworkMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48EE366738317274B649B /* NetworkMock.swift */; };
 		FBAB1AEC24E98A0F00BADF1C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBAB1AD224E98A0F00BADF1C /* LaunchScreen.storyboard */; };
 		FBAB1AED24E98A0F00BADF1C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBAB1AD324E98A0F00BADF1C /* Assets.xcassets */; };
-		FBAB1AEE24E98A0F00BADF1C /* Updater.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB1AD524E98A0F00BADF1C /* Updater.swift */; };
 		FBAB1AEF24E98A0F00BADF1C /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB1AD624E98A0F00BADF1C /* Network.swift */; };
 		FBAB1AF024E98A0F00BADF1C /* TagModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB1AD824E98A0F00BADF1C /* TagModel.swift */; };
 		FBAB1AF124E98A0F00BADF1C /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBAB1AD924E98A0F00BADF1C /* PostModel.swift */; };
@@ -63,7 +61,6 @@
 		BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModelMock.swift; sourceTree = "<group>"; };
 		BCE485AC4074BDFA5F7430DF /* PostsViewModelMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModelMock.swift; sourceTree = "<group>"; };
 		BCE4885732B61FC4E2B7608A /* NodeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeView.swift; sourceTree = "<group>"; };
-		BCE488BB1362591FAF83835C /* CoordinatorMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoordinatorMock.swift; sourceTree = "<group>"; };
 		BCE489F88F31385B886E1204 /* ChooseTagsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsViewModel.swift; sourceTree = "<group>"; };
 		BCE48A2418D8E0BC9B22E545 /* EditBasicInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewModel.swift; sourceTree = "<group>"; };
 		BCE48A3F450F09098E3FC449 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
@@ -73,7 +70,6 @@
 		FBAB1AC124E989D500BADF1C /* ProtocolTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProtocolTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBAB1AD224E98A0F00BADF1C /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FBAB1AD324E98A0F00BADF1C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FBAB1AD524E98A0F00BADF1C /* Updater.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Updater.swift; sourceTree = "<group>"; };
 		FBAB1AD624E98A0F00BADF1C /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		FBAB1AD824E98A0F00BADF1C /* TagModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagModel.swift; sourceTree = "<group>"; };
 		FBAB1AD924E98A0F00BADF1C /* PostModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostModel.swift; sourceTree = "<group>"; };
@@ -117,7 +113,6 @@
 		BCE48071E2AE672CB0ACA17F /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				BCE488BB1362591FAF83835C /* CoordinatorMock.swift */,
 				BCE484E1496A8663DE1C5E73 /* LoginViewModelMock.swift */,
 				BCE48EE366738317274B649B /* NetworkMock.swift */,
 				BCE4817B0DCDC30FB45C5C5D /* EditBasicInfoViewModelMock.swift */,
@@ -184,7 +179,6 @@
 		FBAB1AD424E98A0F00BADF1C /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
-				FBAB1AD524E98A0F00BADF1C /* Updater.swift */,
 				FBAB1AD624E98A0F00BADF1C /* Network.swift */,
 				FBAB1AD724E98A0F00BADF1C /* Models */,
 				FBAB1ADA24E98A0F00BADF1C /* Views */,
@@ -358,7 +352,6 @@
 				FBAB1AFF24E98A0F00BADF1C /* SceneDelegate.swift in Sources */,
 				FBAB1AF524E98A0F00BADF1C /* LoginView.swift in Sources */,
 				FBAB1AFD24E98A0F00BADF1C /* AppDelegate.swift in Sources */,
-				FBAB1AEE24E98A0F00BADF1C /* Updater.swift in Sources */,
 				FBAB1AF724E98A0F00BADF1C /* PostView.swift in Sources */,
 				FBAB1AF924E98A0F00BADF1C /* ErrorText.swift in Sources */,
 				FBAB1AF824E98A0F00BADF1C /* PostsView.swift in Sources */,
@@ -367,7 +360,6 @@
 				FBAB1AFC24E98A0F00BADF1C /* Mocks.swift in Sources */,
 				BCE4873EC4BB11E6CF2BEC4F /* LoginViewModel.swift in Sources */,
 				BCE48539D0582F76D2BAC2E3 /* ApplicationFlowCoordinator.swift in Sources */,
-				BCE488C278365A7716CB782E /* CoordinatorMock.swift in Sources */,
 				BCE487881AAB58E90FC1DD99 /* LoginViewModelMock.swift in Sources */,
 				BCE48FAE1AE47080E76EBABA /* NetworkMock.swift in Sources */,
 				BCE485F8B31F1E1E8CBE9C19 /* EditBasicInfoViewModel.swift in Sources */,
