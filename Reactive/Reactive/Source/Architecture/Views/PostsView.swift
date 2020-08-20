@@ -9,7 +9,7 @@ struct PostsView: View {
     @State private var tags: [String]
     @State private var models: [PostModel]
     private var isPreview: Bool
-    @Binding private var goingLogin: Bool 
+//    @Binding private var goingLogin: Bool
 
     private let network = Network.shared
     
@@ -20,10 +20,12 @@ struct PostsView: View {
     private let tagsCountToSelect = 3
     private var spacing: CGFloat = 16
     
-    init(tags: [String], models: [PostModel] = [], isPreview: Bool = false, goingLogin: Binding<Bool> = .constant(false)) {
+    init(tags: [String], models: [PostModel] = [], isPreview: Bool = false
+//        , goingLogin: Binding<Bool> = .constant(false)
+    ) {
         _tags = State(initialValue: tags)
         _models = State(initialValue: models)
-        _goingLogin = goingLogin
+//        _goingLogin = goingLogin
         self.isPreview = isPreview
     }
 
@@ -72,7 +74,7 @@ struct PostsView: View {
     }
     
     private func logoutClicked() {
-        goingLogin.toggle()
+//        goingLogin.toggle()
     }
 }
 
