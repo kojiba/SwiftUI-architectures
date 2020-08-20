@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCE484A002AD9F8A32D7D96C /* EditBasicInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48069382B418DEFE6F875 /* EditBasicInfoViewModel.swift */; };
+		BCE485F3B4A7C0BFFEB74BD7 /* ReactiveNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE480587672E4A54CB14963 /* ReactiveNetwork.swift */; };
 		BCE48970DDFE54999C9ECA6F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE487ECD7BECA799ACD8C9F /* LoginViewModel.swift */; };
+		BCE48A03E86769953D165DD7 /* PostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48FC8C116D9079D28EE99 /* PostsViewModel.swift */; };
+		BCE48CCE98D74DE03C292098 /* ChooseTagsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE484360C9CAFE4B46CB9C2 /* ChooseTagsViewModel.swift */; };
+		BCE48D26E7F019707AA600A3 /* View+ActiveRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE487FFE4BF87C506BD5553 /* View+ActiveRoute.swift */; };
+		BCE48F436D6052933201DD99 /* CreatePasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE48F277F9375E4FBC4264E /* CreatePasswordViewModel.swift */; };
 		FBEA4A0D24EC57EF005519DA /* ReactiveTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBEA4A0C24EC57EF005519DA /* ReactiveTests.swift */; };
 		FBEA4A3524EC582A005519DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBEA4A1924EC582A005519DA /* LaunchScreen.storyboard */; };
 		FBEA4A3624EC582A005519DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBEA4A1A24EC582A005519DA /* Assets.xcassets */; };
@@ -42,7 +48,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BCE480587672E4A54CB14963 /* ReactiveNetwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveNetwork.swift; sourceTree = "<group>"; };
+		BCE48069382B418DEFE6F875 /* EditBasicInfoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewModel.swift; sourceTree = "<group>"; };
+		BCE484360C9CAFE4B46CB9C2 /* ChooseTagsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTagsViewModel.swift; sourceTree = "<group>"; };
 		BCE487ECD7BECA799ACD8C9F /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BCE487FFE4BF87C506BD5553 /* View+ActiveRoute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View+ActiveRoute.swift"; sourceTree = "<group>"; };
+		BCE48F277F9375E4FBC4264E /* CreatePasswordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewModel.swift; sourceTree = "<group>"; };
+		BCE48FC8C116D9079D28EE99 /* PostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostsViewModel.swift; sourceTree = "<group>"; };
 		FBEA49F224EC57EE005519DA /* Reactive.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reactive.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEA4A0824EC57EF005519DA /* ReactiveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBEA4A0C24EC57EF005519DA /* ReactiveTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactiveTests.swift; sourceTree = "<group>"; };
@@ -93,6 +105,10 @@
 			isa = PBXGroup;
 			children = (
 				BCE487ECD7BECA799ACD8C9F /* LoginViewModel.swift */,
+				BCE48069382B418DEFE6F875 /* EditBasicInfoViewModel.swift */,
+				BCE48F277F9375E4FBC4264E /* CreatePasswordViewModel.swift */,
+				BCE484360C9CAFE4B46CB9C2 /* ChooseTagsViewModel.swift */,
+				BCE48FC8C116D9079D28EE99 /* PostsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,6 +183,8 @@
 				FBEA4A2324EC582A005519DA /* Models */,
 				FBEA4A2624EC582A005519DA /* Views */,
 				BCE481A085068A65AB82FC81 /* ViewModels */,
+				BCE487FFE4BF87C506BD5553 /* View+ActiveRoute.swift */,
+				BCE480587672E4A54CB14963 /* ReactiveNetwork.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -321,6 +339,12 @@
 				FBEA4A3A24EC582A005519DA /* Mocks.swift in Sources */,
 				FBEA4A3B24EC582A005519DA /* Updater.swift in Sources */,
 				BCE48970DDFE54999C9ECA6F /* LoginViewModel.swift in Sources */,
+				BCE484A002AD9F8A32D7D96C /* EditBasicInfoViewModel.swift in Sources */,
+				BCE48D26E7F019707AA600A3 /* View+ActiveRoute.swift in Sources */,
+				BCE48F436D6052933201DD99 /* CreatePasswordViewModel.swift in Sources */,
+				BCE48CCE98D74DE03C292098 /* ChooseTagsViewModel.swift in Sources */,
+				BCE485F3B4A7C0BFFEB74BD7 /* ReactiveNetwork.swift in Sources */,
+				BCE48A03E86769953D165DD7 /* PostsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

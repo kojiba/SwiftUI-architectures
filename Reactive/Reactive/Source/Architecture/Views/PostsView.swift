@@ -6,46 +6,38 @@
 import SwiftUI
 
 struct PostsView: View {
-    @State private var tags: [String]
-    @State private var models: [PostModel]
-    private var isPreview: Bool
-//    @Binding private var goingLogin: Bool
 
-    private let network = Network.shared
-    
-    @State private var isLoading = false
+    @ObservedObject private var viewModel: PostsViewModel
 
-    @ObservedObject private var updater = Updater()
-
-    private let tagsCountToSelect = 3
     private var spacing: CGFloat = 16
-    
-    init(tags: [String], models: [PostModel] = [], isPreview: Bool = false
-//        , goingLogin: Binding<Bool> = .constant(false)
-    ) {
-        _tags = State(initialValue: tags)
-        _models = State(initialValue: models)
-//        _goingLogin = goingLogin
-        self.isPreview = isPreview
+
+    init(viewModel: PostsViewModel) {
+        self.viewModel = viewModel
     }
 
     var body: some View {
         VStack(spacing: .zero) {
-            if isLoading {
-                loadingView
-            } else {
-                listView
-            }
+            stateView
         }
-            .onAppear(perform: onAppear)
+            .onAppear(perform: { self.viewModel.send(event: .onAppear) })
             .navigationBarTitle("Posts", displayMode: .inline)
             .navigationBarBackButtonHidden(true)
-            .navigationBarItems(trailing: Button(action: logoutClicked) {
+            .navigationBarItems(trailing: Button(action: { self.viewModel.send(event: .logoutClicked) }) {
                 Text("Logout")
             })
     }
 
-    private var listView: some View {
+    private var stateView: some View {
+        switch viewModel.state {
+        case .loaded(let models):
+            return listView(models: models).toAnyView()
+
+        case .loading:
+            return loadingView.toAnyView()
+        }
+    }
+
+    private func listView(models: [PostModel]) -> some View {
         ScrollView {
             VStack(spacing: spacing) {
 
@@ -59,28 +51,10 @@ struct PostsView: View {
             }
         }
     }
-
-    /// Actions
-
-    private func onAppear() {
-        if isPreview { return }
-
-        isLoading = true
-        network.getPosts(tags: tags) { models in
-
-            self.models = models
-            self.isLoading = false
-        }
-    }
-    
-    private func logoutClicked() {
-//        goingLogin.toggle()
-    }
 }
 
 struct PostsView_Previews: PreviewProvider {
     static var previews: some View {
-        PostsView(tags: ["preview", "test"], 
-            models: [.sample, .sample, .sample, .sample, .sample], isPreview: true)
+        PostsView(viewModel: PostsViewModel(tags: ["1", "demo", "some"], network: ReactiveNetworkMock()))
     }
 }

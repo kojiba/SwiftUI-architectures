@@ -7,7 +7,7 @@ import Foundation
 import SwiftUI
 import Combine
 
-class LoginViewModel: ObservableObject {
+final class LoginViewModel: ObservableObject {
     
     @Published private(set) var state = State.idle
 
@@ -24,22 +24,22 @@ class LoginViewModel: ObservableObject {
     }
 
     enum Event {
+        case onAppear
         case loginClicked(String, String)
         case signUpClicked
     }
 
     init() {
         let queue = DispatchQueue.main
-
-
+        
         input
             .receive(on: queue)
             .filter { [weak self] _ in
                 guard let state = self?.state else { return false }
                 switch state {
-                case .loading, .navigating:
+                case .loading:
                     return false
-                case .idle, .error:
+                case .idle, .error, .navigating:
                     // Only progress if we're idle or in error state
                     return true
                 }
@@ -48,8 +48,12 @@ class LoginViewModel: ObservableObject {
                 guard let strongSelf = self else { return }
                 
                 switch event {
+                case .onAppear:
+                    strongSelf.state = .idle
+                    
                 case .signUpClicked:
                     strongSelf.state = .navigating(strongSelf.editBasicInfoView())
+                    
                 case .loginClicked(let email, let password):
                     guard strongSelf.canLoad else { return }
 
@@ -119,7 +123,7 @@ class LoginViewModel: ObservableObject {
     /// Routes
 
     private func postsView() -> AnyView {
-        PostsView(tags: ["Login", "Tag", "1"]).toAnyView()
+        PostsView(viewModel: PostsViewModel(tags: ["Login", "Tag", "1"])).toAnyView()
     }
 
     private func editBasicInfoView() -> AnyView {

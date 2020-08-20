@@ -21,8 +21,11 @@ struct LoginView: View {
     private let spacing: CGFloat = 16
 
     var body: some View {
+        VStack(spacing: .zero) {
             stateView
-                .navigationBarTitle("Login", displayMode: .inline)
+        }
+            .onAppear(perform: { self.viewModel.send(event: .onAppear)})
+            .navigationBarTitle("Login", displayMode: .inline)
     }
 
     private var stateView: some View {
@@ -62,12 +65,6 @@ struct LoginView: View {
             Button(action: { self.viewModel.send(event: .signUpClicked) }) {
                 Text("Sign Up")
             }
-        }
-    }
-
-    private func activeRoute(to view: AnyView) -> some View {
-        NavigationLink(destination: view, isActive: .constant(true)) {
-            EmptyView()
         }
     }
 }

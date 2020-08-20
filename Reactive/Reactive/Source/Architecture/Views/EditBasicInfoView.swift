@@ -6,57 +6,45 @@
 import SwiftUI
 
 struct EditBasicInfoView: View {
+    @ObservedObject var viewModel = EditBasicInfoViewModel()
+    
     @State var name = ""
     @State var email = ""
-    @State private var error = ""
-
-    @State private var navigatingNextView = false
 
     private let spacing: CGFloat = 16
 
     var body: some View {
+        VStack(spacing: 0) {
+            stateView()
+        }
+            .onAppear(perform: { self.viewModel.send(event: .onAppear)})
+            .navigationBarTitle("Basic Info", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: { self.viewModel.send(event: .nextClicked(self.name, self.email)) }) {
+                Text("Next")
+            })
+    }
+
+    func stateView() -> some View {
+        switch viewModel.state {
+        case .idle:
+            return view().toAnyView()
+
+        case .error(let error):
+            return view(error: error).toAnyView()
+
+        case .navigating(let destination):
+            return activeRoute(to: destination).toAnyView()
+        }
+    }
+
+    func view(error: String = "") -> some View {
         VStack(spacing: spacing) {
 
             ErrorText(error: error)
 
             InputField(placeholder: "Name", text: $name)
             InputField(placeholder: "Email", text: $email)
-
-            NavigationLink(destination: CreatePasswordView(), isActive: $navigatingNextView) {
-                EmptyView()
-            }
         }
-            .navigationBarTitle("Basic Info", displayMode: .inline)
-            .navigationBarItems(trailing: Button(action: nextClicked) {
-                Text("Next")
-            })
-    }
-    
-    private func nextClicked() {
-        error = validate()
-        if error.isEmpty {
-            navigatingNextView = true
-        }
-    }
-
-    private func validate() -> String {
-        if name.isEmpty {
-            return "Name is empty"
-        }
-        if email.isEmpty {
-            return "Email is empty"
-        }
-        if !isValidEmail(email) {
-            return "Email format is wrong, should be x@x.x"
-        }
-        return ""
-    }
-
-    private func isValidEmail(_ email: String) -> Bool {
-        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
-
-        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailPred.evaluate(with: email)
     }
 }
 

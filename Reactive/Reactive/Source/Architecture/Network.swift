@@ -43,18 +43,4 @@ class Network {
     }
 }
 
-class ReactiveNetworkFacade {
-    static let shared = ReactiveNetworkFacade()
-    private let network = Network.shared
-
-    func login(email: String, password: String) -> AnyPublisher<Bool, Never> {
-        Future<Bool, Never> { promise in
-            self.network.login(email: email, password: password) { result in
-                promise(.success(result))
-            }
-        }
-            .eraseToAnyPublisher()
-    }
-}
-
 
