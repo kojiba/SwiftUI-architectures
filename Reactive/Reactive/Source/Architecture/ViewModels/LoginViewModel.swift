@@ -30,48 +30,37 @@ class LoginViewModel: ObservableObject {
 
     init() {
         let queue = DispatchQueue.main
-        
+
+
         input
             .receive(on: queue)
-            .sink { event in
-                switch event {
-
-                case .signUpClicked: do {
-
-                    switch self.state {
-                    case .idle, .error:
-                        self.state = .navigating(self.editBasicInfoView())
-                    default: do {}
-                    }
+            .filter { [weak self] _ in
+                guard let state = self?.state else { return false }
+                switch state {
+                case .loading, .navigating:
+                    return false
+                case .idle, .error:
+                    // Only progress if we're idle or in error state
+                    return true
                 }
-                    
+            }
+            .sink { [weak self] event in
+                guard let strongSelf = self else { return }
+                
+                switch event {
+                case .signUpClicked:
+                    strongSelf.state = .navigating(strongSelf.editBasicInfoView())
                 case .loginClicked(let email, let password):
+                    guard strongSelf.canLoad else { return }
 
-                    switch self.state {
-                    case .idle, .error:
-                        let error = self.validate(email: email, password: password)
-                        if !error.isEmpty {
-                            self.state = .error(error)
-                            return
-                        }
-
-                        self.state = .loading
-
-                        self.network
-                            .login(email: email, password: password)
-                            .sink(receiveCompletion: { completion in
-                                
-                            }, receiveValue: { b in
-
-                                if b {
-                                    self.state = .idle
-                                    self.state = .navigating(self.postsView())
-                                } else {
-                                    self.state = .error("Failed to login")
-                                }
-                            })
-                            .store(in: &self.store)
+                    let error = strongSelf.validate(email: email, password: password)
+                    
+                    guard error.isEmpty else {
+                        strongSelf.state = .error(error)
+                        return
                     }
+                    
+                    strongSelf.performLogin(email: email, password: password)
                 }
             }
             .store(in: &store)
@@ -86,14 +75,6 @@ class LoginViewModel: ObservableObject {
         input.send(event)
     }
 
-    private func postsView() -> AnyView {
-        PostsView(tags: ["Login", "Tag", "1"]).toAnyView()
-    }
-
-    private func editBasicInfoView() -> AnyView {
-        EditBasicInfoView().toAnyView()
-    }
-
     /// Logic
 
     private func validate(email: String, password: String) -> String {
@@ -105,5 +86,43 @@ class LoginViewModel: ObservableObject {
         }
 
         return ""
+    }
+
+    private var canLoad: Bool {
+        switch state {
+        case .idle, .error:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private func performLogin(email: String, password: String) {
+        self.state = .loading
+
+        self.network
+            .login(email: email, password: password)
+            .sink { [weak self] success in
+                guard let self = self else {
+                    return
+                }
+                if success {
+                    self.state = .idle
+                    self.state = .navigating(self.postsView())
+                } else {
+                    self.state = .error("Failed to login")
+                }
+            }
+            .store(in: &self.store)
+    }
+
+    /// Routes
+
+    private func postsView() -> AnyView {
+        PostsView(tags: ["Login", "Tag", "1"]).toAnyView()
+    }
+
+    private func editBasicInfoView() -> AnyView {
+        EditBasicInfoView().toAnyView()
     }
 }
