@@ -59,6 +59,7 @@ final class ChooseTagsViewModel: ObservableObject {
 
     init(network: ReactiveNetwork = ReactiveNetworkFacade.shared, coordinator: ApplicationFlowCoordinator) {
         self.network = network
+        self.coordinator = coordinator
 
         let queue = DispatchQueue.main
 
