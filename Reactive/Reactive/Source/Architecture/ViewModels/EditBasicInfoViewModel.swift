@@ -10,7 +10,8 @@ import Combine
 final class EditBasicInfoViewModel: ObservableObject {
 
     @Published private(set) var state = State.idle
-    
+
+    private weak var coordinator: ApplicationFlowCoordinator?
     private var store = Set<AnyCancellable>()
     private let input = PassthroughSubject<Event, Never>()
 
@@ -25,7 +26,8 @@ final class EditBasicInfoViewModel: ObservableObject {
         case nextClicked(String, String)
     }
 
-    init() {
+    init(coordinator: ApplicationFlowCoordinator) {
+        self.coordinator = coordinator
         let queue = DispatchQueue.main
 
         input
@@ -45,8 +47,8 @@ final class EditBasicInfoViewModel: ObservableObject {
                         strongSelf.state = .error(error)
                         return
                     }
-                    
-                    strongSelf.state = .navigating(strongSelf.createPasswordView())
+
+                    strongSelf.navigateOrFail(route: .createPassword)
                 }
             }
             .store(in: &store)
@@ -62,7 +64,16 @@ final class EditBasicInfoViewModel: ObservableObject {
     }
 
     /// Logic
+    
+    private func navigateOrFail(route: ApplicationFlowCoordinator.Route) {
+        guard let view = coordinator?.view(for: route) else {
+            state = .error("Cannot load next view")
+            return
+        }
 
+        state = .navigating(view)
+    }
+    
     private func validate(name: String, email: String) -> String {
         if name.isEmpty {
             return "Name is empty"
@@ -81,11 +92,5 @@ final class EditBasicInfoViewModel: ObservableObject {
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailPred.evaluate(with: email)
-    }
-
-    /// Routes
-
-    private func createPasswordView() -> AnyView {
-        CreatePasswordView().toAnyView()
     }
 }

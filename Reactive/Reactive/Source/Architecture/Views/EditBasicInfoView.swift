@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct EditBasicInfoView: View {
-    @ObservedObject var viewModel = EditBasicInfoViewModel()
+    @ObservedObject var viewModel: EditBasicInfoViewModel
     
     @State var name = ""
     @State var email = ""
@@ -50,6 +50,6 @@ struct EditBasicInfoView: View {
 
 struct EditBasicInfoView_Previews: PreviewProvider {
     static var previews: some View {
-        EditBasicInfoView()
+        EditBasicInfoView(viewModel: EditBasicInfoViewModel(coordinator: .previewCoordinator))
     }
 }

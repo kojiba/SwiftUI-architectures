@@ -12,6 +12,7 @@ final class LoginViewModel: ObservableObject {
     @Published private(set) var state = State.idle
 
     private let network = ReactiveNetworkFacade.shared
+    private weak var coordinator: ApplicationFlowCoordinator?
 
     private var store = Set<AnyCancellable>()
     private let input = PassthroughSubject<Event, Never>()
@@ -29,7 +30,9 @@ final class LoginViewModel: ObservableObject {
         case signUpClicked
     }
 
-    init() {
+    init(coordinator: ApplicationFlowCoordinator) {
+        self.coordinator = coordinator
+        
         let queue = DispatchQueue.main
         
         input
@@ -52,7 +55,7 @@ final class LoginViewModel: ObservableObject {
                     strongSelf.state = .idle
                     
                 case .signUpClicked:
-                    strongSelf.state = .navigating(strongSelf.editBasicInfoView())
+                    strongSelf.navigateOrFail(route: .editBasicInfo)
                     
                 case .loginClicked(let email, let password):
                     guard strongSelf.canLoad else { return }
@@ -100,6 +103,15 @@ final class LoginViewModel: ObservableObject {
             return false
         }
     }
+
+    private func navigateOrFail(route: ApplicationFlowCoordinator.Route) {
+        guard let view = coordinator?.view(for: route) else {
+            state = .error("Cannot load next view")
+            return
+        }
+
+        state = .navigating(view)
+    }
     
     private func performLogin(email: String, password: String) {
         self.state = .loading
@@ -107,26 +119,18 @@ final class LoginViewModel: ObservableObject {
         self.network
             .login(email: email, password: password)
             .sink { [weak self] success in
-                guard let self = self else {
+                guard let strongSelf = self else {
                     return
                 }
                 if success {
-                    self.state = .idle
-                    self.state = .navigating(self.postsView())
+                    strongSelf.state = .idle
+                    
+                    strongSelf.navigateOrFail(route: .posts(["Login", "Tag", "1"]))
+                    
                 } else {
-                    self.state = .error("Failed to login")
+                    strongSelf.state = .error("Failed to login")
                 }
             }
             .store(in: &self.store)
-    }
-
-    /// Routes
-
-    private func postsView() -> AnyView {
-        PostsView(viewModel: PostsViewModel(tags: ["Login", "Tag", "1"])).toAnyView()
-    }
-
-    private func editBasicInfoView() -> AnyView {
-        EditBasicInfoView().toAnyView()
     }
 }

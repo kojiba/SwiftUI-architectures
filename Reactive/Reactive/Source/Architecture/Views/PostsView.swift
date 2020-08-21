@@ -55,6 +55,6 @@ struct PostsView: View {
 
 struct PostsView_Previews: PreviewProvider {
     static var previews: some View {
-        PostsView(viewModel: PostsViewModel(tags: ["1", "demo", "some"], network: ReactiveNetworkMock()))
+        PostsView(viewModel: PostsViewModel(tags: ["1", "demo", "some"], network: ReactiveNetworkMock(), coordinator: .previewCoordinator))
     }
 }

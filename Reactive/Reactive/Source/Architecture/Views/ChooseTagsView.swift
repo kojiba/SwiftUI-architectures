@@ -6,15 +6,9 @@
 import SwiftUI
 
 struct ChooseTagsView: View {
-    @ObservedObject private var viewModel: ChooseTagsViewModel
-
-    @ObservedObject private var updater = Updater()
+    @ObservedObject var viewModel: ChooseTagsViewModel
     
-    private var spacing: CGFloat = 16
-
-    init(viewModel: ChooseTagsViewModel = ChooseTagsViewModel()) {
-        self.viewModel = viewModel
-    }
+    private let spacing: CGFloat = 16
 
     var body: some View {
         VStack(spacing: .zero) {
@@ -27,7 +21,7 @@ struct ChooseTagsView: View {
             })
     }
     
-    func stateView() -> some View {
+    private func stateView() -> some View {
         switch viewModel.state {
         
         case .loaded(let models):
@@ -44,7 +38,7 @@ struct ChooseTagsView: View {
         }
     }
 
-    func view(error: String = "", models: [ChooseTagModel]) -> some View {
+    private func view(error: String = "", models: [ChooseTagModel]) -> some View {
         VStack(spacing: .zero) {
             
             ErrorText(error: error)
@@ -74,6 +68,6 @@ struct ChooseTagsView: View {
 
 struct ChooseTagsView_Previews: PreviewProvider {
     static var previews: some View {
-        ChooseTagsView(viewModel: ChooseTagsViewModel(network: ReactiveNetworkMock()))
+        ChooseTagsView(viewModel: ChooseTagsViewModel(network: ReactiveNetworkMock(), coordinator: .previewCoordinator))
     }
 }

@@ -11,6 +11,7 @@ final class PostsViewModel: ObservableObject {
     @Published private(set) var state = State.loading
 
     private let tags: [String]
+    private let coordinator: ApplicationFlowCoordinator
     private let network: ReactiveNetwork
     private var store = Set<AnyCancellable>()
     private let input = PassthroughSubject<Event, Never>()
@@ -25,9 +26,10 @@ final class PostsViewModel: ObservableObject {
         case logoutClicked
     }
 
-    init(tags: [String], network: ReactiveNetwork = ReactiveNetworkFacade.shared) {
+    init(tags: [String], network: ReactiveNetwork = ReactiveNetworkFacade.shared, coordinator: ApplicationFlowCoordinator) {
         self.tags = tags
         self.network = network
+        self.coordinator = coordinator
         
         let queue = DispatchQueue.main
 

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct CreatePasswordView: View {
-    @ObservedObject var viewModel = CreatePasswordViewModel()
+    @ObservedObject var viewModel: CreatePasswordViewModel
     
     @State var password = ""
     @State var confirmPassword = ""
@@ -51,6 +51,6 @@ struct CreatePasswordView: View {
 
 struct CreatePasswordView_Previews: PreviewProvider {
     static var previews: some View {
-        CreatePasswordView()
+        CreatePasswordView(viewModel: CreatePasswordViewModel(coordinator: .previewCoordinator))
     }
 }

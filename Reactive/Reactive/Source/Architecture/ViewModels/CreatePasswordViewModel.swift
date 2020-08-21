@@ -13,6 +13,7 @@ final class CreatePasswordViewModel: ObservableObject {
 
     private var store = Set<AnyCancellable>()
     private let input = PassthroughSubject<Event, Never>()
+    private weak var coordinator: ApplicationFlowCoordinator?
 
     enum State {
         case idle
@@ -27,7 +28,9 @@ final class CreatePasswordViewModel: ObservableObject {
 
     private let symbolsCount = 6
 
-    init() {
+    init(coordinator: ApplicationFlowCoordinator) {
+        self.coordinator = coordinator
+        
         let queue = DispatchQueue.main
 
         input
@@ -50,7 +53,7 @@ final class CreatePasswordViewModel: ObservableObject {
 
                     guard strongSelf.canNavigate else { return }
 
-                    strongSelf.state = .navigating(strongSelf.chooseTagsView())
+                    strongSelf.navigateOrFail(route: .chooseTags)
                 }
             }
             .store(in: &store)
@@ -66,7 +69,16 @@ final class CreatePasswordViewModel: ObservableObject {
     }
 
     /// Logic
-    
+
+    private func navigateOrFail(route: ApplicationFlowCoordinator.Route) {
+        guard let view = coordinator?.view(for: route) else {
+            state = .error("Cannot load next view")
+            return
+        }
+
+        state = .navigating(view)
+    }
+
     private var canNavigate: Bool {
         switch state {
         case .navigating:
@@ -91,11 +103,5 @@ final class CreatePasswordViewModel: ObservableObject {
         }
 
         return ""
-    }
-    
-    /// Routes
-
-    private func chooseTagsView() -> AnyView {
-        ChooseTagsView().toAnyView()
     }
 }

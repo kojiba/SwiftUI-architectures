@@ -37,6 +37,7 @@ final class ChooseTagsViewModel: ObservableObject {
     
     let objectWillChange = ObservableObjectPublisher()
 
+    private weak var coordinator: ApplicationFlowCoordinator?
     private let network: ReactiveNetwork
     private var store = Set<AnyCancellable>()
     private let input = PassthroughSubject<Event, Never>()
@@ -56,7 +57,7 @@ final class ChooseTagsViewModel: ObservableObject {
         case nextClicked
     }
 
-    init(network: ReactiveNetwork = ReactiveNetworkFacade.shared) {
+    init(network: ReactiveNetwork = ReactiveNetworkFacade.shared, coordinator: ApplicationFlowCoordinator) {
         self.network = network
 
         let queue = DispatchQueue.main
@@ -89,7 +90,12 @@ final class ChooseTagsViewModel: ObservableObject {
                         return
                     }
 
-                    strongSelf.state = .navigating(strongSelf.postsView())
+                    guard let view = strongSelf.coordinator?.view(for: .posts(strongSelf.selectedTags)) else {
+                        strongSelf.state = .error("Cannot load next view", strongSelf.tagModels)
+                        return
+                    }
+
+                    strongSelf.state = .navigating(view)
                 }
             }
             .store(in: &store)
@@ -106,6 +112,12 @@ final class ChooseTagsViewModel: ObservableObject {
 
     /// Logic
 
+    private var selectedTags: [String] {
+        self.tagModels
+            .filter { $0.isSelected }
+            .map { $0.tag.tag }
+    }
+    
     private var canSelectTags: Bool {
         switch state {
         case .loading:
@@ -116,7 +128,7 @@ final class ChooseTagsViewModel: ObservableObject {
     }
 
     private func validate() -> String {
-        if (tagModels.filter { $0.isSelected }).count < tagsCountToSelect {
+        if selectedTags.count < tagsCountToSelect {
             return "You need select at least \(tagsCountToSelect) tags"
         }
         return ""
@@ -138,15 +150,5 @@ final class ChooseTagsViewModel: ObservableObject {
                 strongSelf.state = .loaded(result)
             }
             .store(in: &self.store)
-    }
-
-    /// Routes
-
-    private func postsView() -> AnyView {
-        let selectedTags = self.tagModels
-            .filter { $0.isSelected }
-            .map { $0.tag.tag }
-        
-        return PostsView(viewModel: PostsViewModel(tags: selectedTags)).toAnyView()
     }
 }

@@ -12,7 +12,7 @@ extension View {
 }
 
 struct LoginView: View {
-    @ObservedObject var viewModel = LoginViewModel()
+    @ObservedObject var viewModel: LoginViewModel
     
     @State private var email = ""
     @State private var password = ""
@@ -71,6 +71,6 @@ struct LoginView: View {
 
 struct Login_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(viewModel: LoginViewModel(coordinator: .previewCoordinator))
     }
 }
